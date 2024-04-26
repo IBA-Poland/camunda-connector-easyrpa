@@ -1,0 +1,299 @@
+{
+  "$schema" : "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  "name" : "EasyRPA connector",
+  "id" : "io.camunda.connector.EasyRPA",
+  "version" : 1,
+  "category": {
+    "id": "connectors",
+    "name": "Connectors"
+  },
+  "appliesTo": [
+    "bpmn:Task"
+  ],
+  "elementType": {
+    "value": "bpmn:ServiceTask"
+  },
+  "groups": [
+    {
+      "id": "url",
+      "label": "Common url"
+    },
+    {
+      "id": "authentication",
+      "label": "Authentication"
+    },
+    {
+      "id": "process",
+      "label": "Select process"
+    },
+    {
+      "id": "output",
+      "label": "Output mapping"
+    },
+    {
+      "id": "errors",
+      "label": "Error handling"
+    }
+  ],
+  "properties": [
+    {
+      "value": "io.camunda:template:1",
+      "binding": {
+        "property": "type",
+        "type": "zeebe:taskDefinition"
+      },
+      "type": "Hidden"
+    },
+    {
+      "id": "commonUrl",
+      "label": "Common url",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "url",
+      "binding": {
+        "name": "commonUrl",
+        "type": "zeebe:input"
+      },
+      "type": "Text"
+    },
+    {
+      "id": "authentication.clientId",
+      "label": "Client id",
+      "description": "Your application's client ID from the OAuth client",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "authentication",
+      "binding": {
+        "name": "authentication.clientId",
+        "type": "zeebe:input"
+      },
+      "type": "String"
+    },
+    {
+      "id": "authentication.clientSecret",
+      "label": "Client secret",
+      "description": "Your application's client secret from the OAuth client",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "authentication",
+      "binding": {
+        "name": "authentication.clientSecret",
+        "type": "zeebe:input"
+      },
+      "type": "String"
+    },
+    {
+      "id": "processType",
+      "group": "process",
+      "type": "Dropdown",
+      "value": "startProcess",
+      "choices": [
+        {
+          "name": "Start process",
+          "value": "startProcess"
+        },
+        {
+          "name": "Get process status",
+          "value": "processStatus"
+        },
+        {
+          "name": "Get item from Data Store",
+          "value": "findDataStore"
+        },
+        {
+          "name": "Search item in Data Store",
+          "value": "searchDataStore"
+        },
+        {
+          "name": "Search item in Document Set",
+          "value": "searchDocSet"
+        }
+      ],
+      "binding": {
+        "type": "zeebe:input",
+        "name": "process.type",
+        "key": "process.type"
+      }
+    },
+    {
+      "label": "ID easyrpa process",
+      "description": "Enter the ID of the process you want to run on the Easy RPA platform.",
+      "group": "process",
+      "type": "Number",
+      "feel": "optional",
+      "optional": false,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "process.id"
+      },
+      "constraints": {
+        "notEmpty": true
+      },
+      "condition": {
+        "property": "processType",
+        "equals": "startProcess"
+      }
+    },
+    {
+      "label": "RunID EasyRPA ",
+      "description": "Enter the runID of the process that was run on the Easy RPA platform.",
+      "group": "process",
+      "type": "Number",
+      "feel": "optional",
+      "optional": false,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "process.id"
+      },
+      "constraints": {
+        "notEmpty": true
+      },
+      "condition": {
+        "property": "processType",
+        "equals": "processStatus"
+      }
+    },
+    {
+      "label": "Name of data store",
+      "description": "Enter the name of Data store, in which the robots save the documents of your process.",
+      "group": "process",
+      "type": "String",
+      "feel": "optional",
+      "optional": false,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "process.name"
+      },
+      "constraints": {
+        "notEmpty": true
+      },
+      "condition": {
+        "property": "processType",
+        "equals": "findDataStore"
+      }
+    },
+    {
+      "label": "Data store id",
+      "description": "Enter ID of data store on the Easy RPA platform, where Easy RPA save data.",
+      "group": "process",
+      "type": "Number",
+      "feel": "optional",
+      "optional": false,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "process.idDataStore"
+      },
+      "constraints": {
+        "notEmpty": true
+      },
+      "condition": {
+        "property": "processType",
+        "equals": "searchDataStore"
+      }
+    },
+    {
+      "label": "File name",
+      "description": "Enter the name or part of the name of the document you want to find on the Easy RPA platform.",
+      "group": "process",
+      "type": "String",
+      "feel": "optional",
+      "optional": false,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "process.docName"
+      },
+      "constraints": {
+        "notEmpty": true
+      },
+      "condition": {
+        "property": "processType",
+        "oneOf": [
+          "searchDataStore",
+          "searchDocSet"
+        ]
+      }
+    },
+    {
+      "label": "Document Set ID",
+      "description": "Enter ID of document set on the Easy RPA platform, where Easy RPA save data.",
+      "group": "process",
+      "type": "Number",
+      "feel": "optional",
+      "optional": false,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "process.idDocSet"
+      },
+      "constraints": {
+        "notEmpty": true
+      },
+      "condition": {
+        "property": "processType",
+        "equals": "searchDocSet"
+      }
+    },
+    {
+      "label": "Comma separated columns list to return",
+      "description": "Enter the column names by separating them with the comma you want to get in response.",
+      "group": "process",
+      "type": "String",
+      "feel": "optional",
+      "optional": true,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "process.pathParam"
+      },
+      "condition": {
+        "property": "processType",
+        "equals": "searchDocSet"
+      }
+    },
+    {
+      "id": "resultVariable",
+      "label": "Result variable",
+      "description": "Name of variable to store the response in",
+      "group": "output",
+      "binding": {
+        "key": "resultVariable",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "String"
+    },
+    {
+      "id": "resultExpression",
+      "label": "Result expression",
+      "description": "Expression to map the response into process variables",
+      "feel": "required",
+      "group": "output",
+      "binding": {
+        "key": "resultExpression",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "Text"
+    },
+    {
+      "id": "errorExpression",
+      "label": "Error expression",
+      "description": "Expression to handle errors. Details in the <a href=\"https://docs.camunda.io/docs/components/connectors/use-connectors/\" target=\"_blank\">documentation</a>.",
+      "feel": "required",
+      "group": "error",
+      "binding": {
+        "key": "errorExpression",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "Text"
+    }
+  ],
+  "icon": {
+    "contents": "data:image/png;base64,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"
+  }
+}
