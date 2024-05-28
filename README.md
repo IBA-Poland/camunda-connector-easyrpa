@@ -17,14 +17,14 @@ In the properties block “Common URL” set url to Easy RPA platform: https://c
 
 In the properties block “Authentication” set required properties in the Input section: client_id, client_secret, that is issued by the administrator of  EasyRPA to the user. 
 All these parameters are mandatory for initiation of work of the robot. 
-![Authentication!](./assets/images/Authentication.png)
+![Authentication!(./assets/image/Authentication.png)
 In the section “Output mapping” return data depending on the type of process performed by the robot, that can then be used as variables in the Camunda process.
 
 
 Example
 
 
-![example!](./assets/images/example.png)
+![example!](./assets/image/example.png)
 
 
 The Easy RPA Connector supports next operation types in the operation type dropdown list:
@@ -42,9 +42,9 @@ Usage:
 Populate the Common URL and  Authentication section as previously described.
 Select “Start process” from the Operation dropdown.
 In the Operation details section, set “ID EasyRPA process”
-![variables!](./assets/images/variables.png)
+![variables!](./assets/image/variables.png)
 As a result of this operation, Camunda transfers the ID of the process running in EasyRPA.
-![start-process!](./assets/images/start-process.png)
+![start-process!](./assets/image/start-process.png)
 Get process status
 This operation gets the status of the process after the robot is finished. In response to the process, the robot returns the ID process and technical status of the finishing process to Camunda (for example: "status": "Completed"). 
 This operation allows you to integrate with systems that haven’t an API.
