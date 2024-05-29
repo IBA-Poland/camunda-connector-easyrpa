@@ -31,7 +31,7 @@ The Easy RPA Connector supports next operation types in the operation type dropd
 2. Get process status
 3. Search item in Document Set
 4. Search item in Data Store
-5. Get item from Data Store
+5. Get Data Store
 
 Operation type:
 
