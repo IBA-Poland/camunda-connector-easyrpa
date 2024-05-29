@@ -75,12 +75,12 @@ As a result of this operation, the status of the Easy RPA process is passed to C
 
 ![variables2!](./assets/image/variables2.png)
 
-## Get item from Data Store
+## Get Data Store
 
 Data store- it’s  a table in Database, where information is recorded during the process run by the robots. As a result of this operation, the user receives a link where the saved data from the process is stored.
 Usage:
 1.Populate the Common URL and  Authentication section as previously described.
-2.Select “Get item from Data Store” from the Operation dropdown.
+2.Select “Get Data Store” from the Operation dropdown.
 3.In the Operation details section, set “Name of data store”
 
 ![get-item-from-data-store!](./assets/image/get-item-from-data-store.png)
