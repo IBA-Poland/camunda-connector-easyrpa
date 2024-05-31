@@ -106,7 +106,7 @@
           "value": "processStatus"
         },
         {
-          "name": "Get item from Data Store",
+          "name": "Get Data Store",
           "value": "findDataStore"
         },
         {
